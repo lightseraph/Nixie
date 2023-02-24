@@ -1,0 +1,847 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://d:\Altium\AD23\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2023/2/25</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2:36:59</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\NixieClock\Nixie\PCB1.PcbDoc" class="file"><acronym title="D:\NixieClock\Nixie\PCB1.PcbDoc">D:\NixieClock\Nixie\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">173</td></tr>
+</table>
+</td>
+</table><a name="IDRQG4PH2F0T3YIGRHKZGCERLDIMUWR3JKMYQI1JFZEG4BRFZRILEJ"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFBTM0T5MW31IEWEK1SGE3BRHNEOLCOT2DFQMCZCUMNZCA2STED5J">Clearance Constraint (Gap=10mil) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDN5XWEIVW5TGALBBLS0IPH1XCBBMMM31RPVEYB1FYEN4WLQC41TCG">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID41UEQCBXIOFXF0SIWZIY20GSYD45YALGG0AYKRD143DRKO1HJQWL">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMG2BCRPLYGFXKSQE4URLE033CHNJWIPJFEFQSNOSE5FPN5IMLQAC">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJ30SAAIY1IGMG1RXEAY10HIEYKRSXR0TZZGB0UN15OT04XLJW1LO">Width Constraint (Min=10mil) (Max=30mil) (Preferred=20mil) (InNetClass('power'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDCFT1DQSTN21KDMVCWE1MPDFRCJ1BLQ2CMJJU35F03BVNT4FZHMCM">Width Constraint (Min=6mil) (Max=12mil) (Preferred=10mil) (All)</a></td>
+<td class="column2">62</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID23UA30WEQSLCJMXHP4S0E4US0QTVJOSLWX1NPHTPYUUU2Y4MQLF">Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=12mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVC1C2H50CELFGWJWMUAMTKQOKUXCYR00PPHYVPSZBAGLYWSSLO">Silk To Solder Mask (Clearance=6mil) (IsPad),(All)</a></td>
+<td class="column2">57</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUUBZMK3XTVKSPALFVQOUAW1FEDKAGHZLVPUOPKEUJIFHCLBBYQ2H">Silk to Silk (Clearance=6mil) (All),(All)</a></td>
+<td class="column2">52</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID22CNDWMNHHHRHZQXG2TNMV5CPEJ5BPFZCYP1EDGPYO5X5QGI0GH">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">173</td>
+</tr>
+</table><br><a name="IDFBTM0T5MW31IEWEK1SGE3BRHNEOLCOT2DFQMCZCUMNZCA2STED5J"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4067.833mil|Location2.X=4081.083mil|Location1.Y=2913.857mil|Location2.Y=2927.107mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4067.833mil|Location2.X=4081.083mil|Location1.Y=2913.857mil|Location2.Y=2927.107mil|Absolute=True">Clearance Constraint: (6.432mil &lt; 12mil) Between Pad U2-2(2135mil,784.646mil) on Top Layer And Track (1860.197mil,796.053mil)(2026.25mil,630mil) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4453.857mil|Location2.X=4465.107mil|Location1.Y=3793.857mil|Location2.Y=3805.107mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4453.857mil|Location2.X=4465.107mil|Location1.Y=3793.857mil|Location2.Y=3805.107mil|Absolute=True">Clearance Constraint: (9.749mil &lt; 10mil) Between Track (2350mil,1575mil)(2474.016mil,1450.984mil) on Top Layer And Via (2420mil,1540mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDCFT1DQSTN21KDMVCWE1MPDFRCJ1BLQ2CMJJU35F03BVNT4FZHMCM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Width Constraint (Min=6mil) (Max=12mil) (Preferred=10mil) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3056mil|Location2.X=3074mil|Location1.Y=3503.431mil|Location2.Y=3522.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3056mil|Location2.X=3074mil|Location1.Y=3503.431mil|Location2.Y=3522.751mil|Absolute=True">Width Constraint: Track (1015mil,1232.185mil)(1015mil,1252.677mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3062.093mil|Location2.X=3085.507mil|Location1.Y=3487.093mil|Location2.Y=3505.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3062.093mil|Location2.X=3085.507mil|Location1.Y=3487.093mil|Location2.Y=3505.093mil|Absolute=True">Width Constraint: Track (1015mil,1232.185mil)(1027.185mil,1220mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3109.593mil|Location2.X=3135.373mil|Location1.Y=3481mil|Location2.Y=3499mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3109.593mil|Location2.X=3135.373mil|Location1.Y=3481mil|Location2.Y=3499mil|Absolute=True">Width Constraint: Track (1027.185mil,1220mil)(1110mil,1220mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3125.941mil|Location2.X=3159.811mil|Location1.Y=3928.5mil|Location2.Y=3951.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3125.941mil|Location2.X=3159.811mil|Location1.Y=3928.5mil|Location2.Y=3951.5mil|Absolute=True">Width Constraint: Track (1059.882mil,1670mil)(1115mil,1670mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3198.5mil|Location2.X=3221.914mil|Location1.Y=3433.5mil|Location2.Y=3451.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3198.5mil|Location2.X=3221.914mil|Location1.Y=3433.5mil|Location2.Y=3451.5mil|Absolute=True">Width Constraint: Track (1110mil,1220mil)(1205mil,1125mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.905mil|Location2.X=3248.905mil|Location1.Y=2776.026mil|Location2.Y=2801.281mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3225.905mil|Location2.X=3248.905mil|Location1.Y=2776.026mil|Location2.Y=2801.281mil|Absolute=True">Width Constraint: Track (1187.405mil,481.716mil)(1187.405mil,553.335mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3231.763mil|Location2.X=3262.477mil|Location1.Y=2734.358mil|Location2.Y=2757.358mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3231.763mil|Location2.X=3262.477mil|Location1.Y=2734.358mil|Location2.Y=2757.358mil|Absolute=True">Width Constraint: Track (1187.405mil,481.716mil)(1199.121mil,470mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3584.701mil|Location2.X=3618.571mil|Location1.Y=2728.5mil|Location2.Y=2751.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3584.701mil|Location2.X=3618.571mil|Location1.Y=2728.5mil|Location2.Y=2751.5mil|Absolute=True">Width Constraint: Track (1199.121mil,470mil)(1893.281mil,470mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3246mil|Location2.X=3264mil|Location1.Y=3353.244mil|Location2.Y=3372.564mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3246mil|Location2.X=3264mil|Location1.Y=3353.244mil|Location2.Y=3372.564mil|Absolute=True">Width Constraint: Track (1205mil,1059.488mil)(1205mil,1125mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3246mil|Location2.X=3264mil|Location1.Y=3099.519mil|Location2.Y=3118.839mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3246mil|Location2.X=3264mil|Location1.Y=3099.519mil|Location2.Y=3118.839mil|Absolute=True">Width Constraint: Track (1205mil,806.527mil)(1205mil,870.512mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3256mil|Location2.X=3279.414mil|Location1.Y=3057.527mil|Location2.Y=3075.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3256mil|Location2.X=3279.414mil|Location1.Y=3057.527mil|Location2.Y=3075.527mil|Absolute=True">Width Constraint: Track (1205mil,806.527mil)(1225mil,786.527mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3273.244mil|Location2.X=3299.024mil|Location1.Y=3131.512mil|Location2.Y=3149.512mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3273.244mil|Location2.X=3299.024mil|Location1.Y=3131.512mil|Location2.Y=3149.512mil|Absolute=True">Width Constraint: Track (1205mil,870.512mil)(1259.488mil,870.512mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.89mil|Location2.X=3501.76mil|Location1.Y=3819.72mil|Location2.Y=3842.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3467.89mil|Location2.X=3501.76mil|Location1.Y=3819.72mil|Location2.Y=3842.72mil|Absolute=True">Width Constraint: Track (1223.78mil,1561.22mil)(1635mil,1561.22mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3266mil|Location2.X=3284mil|Location1.Y=3019.263mil|Location2.Y=3038.583mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3266mil|Location2.X=3284mil|Location1.Y=3019.263mil|Location2.Y=3038.583mil|Absolute=True">Width Constraint: Track (1225mil,730mil)(1225mil,786.527mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3285.843mil|Location2.X=3311.622mil|Location1.Y=3456mil|Location2.Y=3474mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3285.843mil|Location2.X=3311.622mil|Location1.Y=3456mil|Location2.Y=3474mil|Absolute=True">Width Constraint: Track (1229.685mil,1195mil)(1260mil,1195mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3300.744mil|Location2.X=3318.744mil|Location1.Y=3293.756mil|Location2.Y=3313.076mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3300.744mil|Location2.X=3318.744mil|Location1.Y=3293.756mil|Location2.Y=3313.076mil|Absolute=True">Width Constraint: Track (1259.744mil,870.768mil)(1259.744mil,1194.744mil) on Bottom Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3355.999mil|Location2.X=3373.999mil|Location1.Y=3556.643mil|Location2.Y=3575.963mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3355.999mil|Location2.X=3373.999mil|Location1.Y=3556.643mil|Location2.Y=3575.963mil|Absolute=True">Width Constraint: Track (1314.999mil,1295mil)(1314.999mil,1296.286mil) on Bottom Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3361mil|Location2.X=3384.23mil|Location1.Y=3562.286mil|Location2.Y=3580.286mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3361mil|Location2.X=3384.23mil|Location1.Y=3562.286mil|Location2.Y=3580.286mil|Absolute=True">Width Constraint: Track (1314.999mil,1296.286mil)(1325mil,1306.287mil) on Bottom Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3355.999mil|Location2.X=3373.999mil|Location1.Y=3398.402mil|Location2.Y=3417.722mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3355.999mil|Location2.X=3373.999mil|Location1.Y=3398.402mil|Location2.Y=3417.722mil|Absolute=True">Width Constraint: Track (1314.999mil,979.804mil)(1314.999mil,1295mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3385.902mil|Location2.X=3419.772mil|Location1.Y=3238.304mil|Location2.Y=3261.304mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3385.902mil|Location2.X=3419.772mil|Location1.Y=3238.304mil|Location2.Y=3261.304mil|Absolute=True">Width Constraint: Track (1314.999mil,979.804mil)(1379.804mil,979.804mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3366mil|Location2.X=3384mil|Location1.Y=3921.643mil|Location2.Y=3940.963mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3366mil|Location2.X=3384mil|Location1.Y=3921.643mil|Location2.Y=3940.963mil|Absolute=True">Width Constraint: Track (1325mil,1306.287mil)(1325mil,2015mil) on Bottom Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.803mil|Location2.X=3534.673mil|Location1.Y=2648.5mil|Location2.Y=2671.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3500.803mil|Location2.X=3534.673mil|Location1.Y=2648.5mil|Location2.Y=2671.5mil|Absolute=True">Width Constraint: Track (1365mil,390mil)(1559.607mil,390mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3472.792mil|Location2.X=3503.265mil|Location1.Y=3292.792mil|Location2.Y=3315.792mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3472.792mil|Location2.X=3503.265mil|Location1.Y=3292.792mil|Location2.Y=3315.792mil|Absolute=True">Width Constraint: Track (1379.804mil,979.804mil)(1488.78mil,1088.78mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3600.39mil|Location2.X=3634.26mil|Location1.Y=3347.28mil|Location2.Y=3370.28mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3600.39mil|Location2.X=3634.26mil|Location1.Y=3347.28mil|Location2.Y=3370.28mil|Absolute=True">Width Constraint: Track (1488.78mil,1088.78mil)(1635mil,1088.78mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3670.803mil|Location2.X=3704.673mil|Location1.Y=2648.894mil|Location2.Y=2671.894mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3670.803mil|Location2.X=3704.673mil|Location1.Y=2648.894mil|Location2.Y=2671.894mil|Absolute=True">Width Constraint: Track (1560.001mil,390.394mil)(1704.607mil,390.394mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3695.28mil|Location2.X=3725.994mil|Location1.Y=3325.5mil|Location2.Y=3348.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3695.28mil|Location2.X=3725.994mil|Location1.Y=3325.5mil|Location2.Y=3348.5mil|Absolute=True">Width Constraint: Track (1635mil,1088.78mil)(1678.56mil,1045.22mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3717.06mil|Location2.X=3740.06mil|Location1.Y=3286.83mil|Location2.Y=3312.085mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3717.06mil|Location2.X=3740.06mil|Location1.Y=3286.83mil|Location2.Y=3312.085mil|Absolute=True">Width Constraint: Track (1678.56mil,1011.44mil)(1678.56mil,1045.22mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.52mil|Location2.X=3797.234mil|Location1.Y=3220.48mil|Location2.Y=3243.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3766.52mil|Location2.X=3797.234mil|Location1.Y=3220.48mil|Location2.Y=3243.48mil|Absolute=True">Width Constraint: Track (1678.56mil,1011.44mil)(1777.481mil,912.519mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.303mil|Location2.X=3804.017mil|Location1.Y=2618.697mil|Location2.Y=2641.697mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3773.303mil|Location2.X=3804.017mil|Location1.Y=2618.697mil|Location2.Y=2641.697mil|Absolute=True">Width Constraint: Track (1704.607mil,390.394mil)(1765mil,330mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3803.5mil|Location2.X=3826.5mil|Location1.Y=2543.5mil|Location2.Y=2568.755mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3803.5mil|Location2.X=3826.5mil|Location1.Y=2543.5mil|Location2.Y=2568.755mil|Absolute=True">Width Constraint: Track (1765mil,240mil)(1765mil,330mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.981mil|Location2.X=3838.981mil|Location1.Y=3084.76mil|Location2.Y=3110.015mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.981mil|Location2.X=3838.981mil|Location1.Y=3084.76mil|Location2.Y=3110.015mil|Absolute=True">Width Constraint: Track (1777.481mil,740.001mil)(1777.481mil,912.519mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3898.697mil|Location2.X=3921.697mil|Location1.Y=3131.526mil|Location2.Y=3156.781mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3898.697mil|Location2.X=3921.697mil|Location1.Y=3131.526mil|Location2.Y=3156.781mil|Absolute=True">Width Constraint: Track (1860.197mil,796.053mil)(1860.197mil,950mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3981.723mil|Location2.X=4012.437mil|Location1.Y=2971.526mil|Location2.Y=2994.526mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3981.723mil|Location2.X=4012.437mil|Location1.Y=2971.526mil|Location2.Y=2994.526mil|Absolute=True">Width Constraint: Track (1860.197mil,796.053mil)(2026.25mil,630mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3937.639mil|Location2.X=3968.113mil|Location1.Y=2734.358mil|Location2.Y=2757.358mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3937.639mil|Location2.X=3968.113mil|Location1.Y=2734.358mil|Location2.Y=2757.358mil|Absolute=True">Width Constraint: Track (1893.281mil,470mil)(1904.997mil,481.716mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4004.099mil|Location2.X=4037.969mil|Location1.Y=2776.102mil|Location2.Y=2799.102mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4004.099mil|Location2.X=4037.969mil|Location1.Y=2776.102mil|Location2.Y=2799.102mil|Absolute=True">Width Constraint: Track (1897.497mil,517.602mil)(2033.701mil,517.602mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3943.497mil|Location2.X=3966.497mil|Location1.Y=2758.159mil|Location2.Y=2783.414mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3943.497mil|Location2.X=3966.497mil|Location1.Y=2758.159mil|Location2.Y=2783.414mil|Absolute=True">Width Constraint: Track (1904.997mil,481.716mil)(1904.997mil,517.602mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4090.626mil|Location2.X=4116.406mil|Location1.Y=2591.551mil|Location2.Y=2609.551mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4090.626mil|Location2.X=4116.406mil|Location1.Y=2591.551mil|Location2.Y=2609.551mil|Absolute=True">Width Constraint: Track (2023.701mil,330.551mil)(2075.551mil,330.551mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4157.603mil|Location2.X=4191.473mil|Location1.Y=2888.5mil|Location2.Y=2911.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4157.603mil|Location2.X=4191.473mil|Location1.Y=2888.5mil|Location2.Y=2911.5mil|Absolute=True">Width Constraint: Track (2026.25mil,630mil)(2211.957mil,630mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4139.818mil|Location2.X=4163.048mil|Location1.Y=2614.818mil|Location2.Y=2632.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4139.818mil|Location2.X=4163.048mil|Location1.Y=2614.818mil|Location2.Y=2632.818mil|Absolute=True">Width Constraint: Track (2075.551mil,330.551mil)(2122.084mil,377.084mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4192.044mil|Location2.X=4217.824mil|Location1.Y=2638.084mil|Location2.Y=2656.084mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4192.044mil|Location2.X=4217.824mil|Location1.Y=2638.084mil|Location2.Y=2656.084mil|Absolute=True">Width Constraint: Track (2122.084mil,377.084mil)(2180.003mil,377.084mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4212.26mil|Location2.X=4230.26mil|Location1.Y=3552.521mil|Location2.Y=3571.841mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4212.26mil|Location2.X=4230.26mil|Location1.Y=3552.521mil|Location2.Y=3571.841mil|Absolute=True">Width Constraint: Track (2171.26mil,1273.041mil)(2171.26mil,1310mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4221.63mil|Location2.X=4245.044mil|Location1.Y=3524.671mil|Location2.Y=3542.671mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4221.63mil|Location2.X=4245.044mil|Location1.Y=3524.671mil|Location2.Y=3542.671mil|Absolute=True">Width Constraint: Track (2171.26mil,1273.041mil)(2190mil,1254.301mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4238.554mil|Location2.X=4264.334mil|Location1.Y=2639.043mil|Location2.Y=2657.043mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4238.554mil|Location2.X=4264.334mil|Location1.Y=2639.043mil|Location2.Y=2657.043mil|Absolute=True">Width Constraint: Track (2180.962mil,378.043mil)(2214.145mil,378.043mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4231mil|Location2.X=4249mil|Location1.Y=3483.151mil|Location2.Y=3502.471mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4231mil|Location2.X=4249mil|Location1.Y=3483.151mil|Location2.Y=3502.471mil|Absolute=True">Width Constraint: Track (2190mil,1190mil)(2190mil,1254.301mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4257.254mil|Location2.X=4287.968mil|Location1.Y=2881.703mil|Location2.Y=2904.703mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4257.254mil|Location2.X=4287.968mil|Location1.Y=2881.703mil|Location2.Y=2904.703mil|Absolute=True">Width Constraint: Track (2211.957mil,630mil)(2225.551mil,616.406mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4260.848mil|Location2.X=4284.079mil|Location1.Y=2644.746mil|Location2.Y=2662.746mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4260.848mil|Location2.X=4284.079mil|Location1.Y=2644.746mil|Location2.Y=2662.746mil|Absolute=True">Width Constraint: Track (2214.145mil,378.043mil)(2225.551mil,389.449mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4266.551mil|Location2.X=4284.551mil|Location1.Y=2726.984mil|Location2.Y=2746.304mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4266.551mil|Location2.X=4284.551mil|Location1.Y=2726.984mil|Location2.Y=2746.304mil|Absolute=True">Width Constraint: Track (2225.551mil,389.449mil)(2225.551mil,542.52mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4264.051mil|Location2.X=4287.051mil|Location1.Y=2837.963mil|Location2.Y=2863.218mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4264.051mil|Location2.X=4287.051mil|Location1.Y=2837.963mil|Location2.Y=2863.218mil|Absolute=True">Width Constraint: Track (2225.551mil,542.52mil)(2225.551mil,616.406mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4270.311mil|Location2.X=4293.725mil|Location1.Y=2799.76mil|Location2.Y=2817.76mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4270.311mil|Location2.X=4293.725mil|Location1.Y=2799.76mil|Location2.Y=2817.76mil|Absolute=True">Width Constraint: Track (2225.551mil,542.52mil)(2233.071mil,535mil) on Top Layer Actual Width = 15mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4478.5mil|Location2.X=4501.5mil|Location1.Y=3527.439mil|Location2.Y=3552.694mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4478.5mil|Location2.X=4501.5mil|Location1.Y=3527.439mil|Location2.Y=3552.694mil|Absolute=True">Width Constraint: Track (2440mil,1235mil)(2440mil,1302.877mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4506mil|Location2.X=4536.714mil|Location1.Y=3466mil|Location2.Y=3489mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4506mil|Location2.X=4536.714mil|Location1.Y=3466mil|Location2.Y=3489mil|Absolute=True">Width Constraint: Track (2440mil,1235mil)(2495mil,1180mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4484.358mil|Location2.X=4514.832mil|Location1.Y=3567.235mil|Location2.Y=3590.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4484.358mil|Location2.X=4514.832mil|Location1.Y=3567.235mil|Location2.Y=3590.235mil|Absolute=True">Width Constraint: Track (2440mil,1302.877mil)(2451.716mil,1314.593mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4519.399mil|Location2.X=4553.269mil|Location1.Y=3573.093mil|Location2.Y=3596.093mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4519.399mil|Location2.X=4553.269mil|Location1.Y=3573.093mil|Location2.Y=3596.093mil|Absolute=True">Width Constraint: Track (2451.716mil,1314.593mil)(2510.083mil,1314.593mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581mil|Location2.X=4614.87mil|Location1.Y=3438.5mil|Location2.Y=3461.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4581mil|Location2.X=4614.87mil|Location1.Y=3438.5mil|Location2.Y=3461.5mil|Absolute=True">Width Constraint: Track (2495mil,1180mil)(2590mil,1180mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4549.661mil|Location2.X=4580.135mil|Location1.Y=3574.171mil|Location2.Y=3597.171mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4549.661mil|Location2.X=4580.135mil|Location1.Y=3574.171mil|Location2.Y=3597.171mil|Absolute=True">Width Constraint: Track (2510.083mil,1314.593mil)(2512.24mil,1316.75mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4644.75mil|Location2.X=4675.464mil|Location1.Y=3422.25mil|Location2.Y=3445.25mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4644.75mil|Location2.X=4675.464mil|Location1.Y=3422.25mil|Location2.Y=3445.25mil|Absolute=True">Width Constraint: Track (2590mil,1180mil)(2622.5mil,1147.5mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4661mil|Location2.X=4684mil|Location1.Y=3346.382mil|Location2.Y=3371.637mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4661mil|Location2.X=4684mil|Location1.Y=3346.382mil|Location2.Y=3371.637mil|Absolute=True">Width Constraint: Track (2622.5mil,1080mil)(2622.5mil,1095.764mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4661mil|Location2.X=4684mil|Location1.Y=3380.132mil|Location2.Y=3405.387mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4661mil|Location2.X=4684mil|Location1.Y=3380.132mil|Location2.Y=3405.387mil|Absolute=True">Width Constraint: Track (2622.5mil,1095.764mil)(2622.5mil,1147.5mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2803.5mil|Location2.X=2837.37mil|Location1.Y=2948.5mil|Location2.Y=2971.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2803.5mil|Location2.X=2837.37mil|Location1.Y=2948.5mil|Location2.Y=2971.5mil|Absolute=True">Width Constraint: Track (720mil,690mil)(810mil,690mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.5mil|Location2.X=2893.974mil|Location1.Y=2963.5mil|Location2.Y=2986.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2863.5mil|Location2.X=2893.974mil|Location1.Y=2963.5mil|Location2.Y=2986.5mil|Absolute=True">Width Constraint: Track (810mil,690mil)(840mil,720mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2988.441mil|Location2.X=3018.915mil|Location1.Y=3818.559mil|Location2.Y=3841.559mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2988.441mil|Location2.X=3018.915mil|Location1.Y=3818.559mil|Location2.Y=3841.559mil|Absolute=True">Width Constraint: Track (840mil,1450.118mil)(1059.882mil,1670mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2878.5mil|Location2.X=2901.5mil|Location1.Y=3343.559mil|Location2.Y=3368.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2878.5mil|Location2.X=2901.5mil|Location1.Y=3343.559mil|Location2.Y=3368.814mil|Absolute=True">Width Constraint: Track (840mil,720mil)(840mil,1450.118mil) on Top Layer Actual Width = 20mil, Target Width = 12mil</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDVC1C2H50CELFGWJWMUAMTKQOKUXCYR00PPHYVPSZBAGLYWSSLO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=6mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3824.98mil|Location2.X=3829.98mil|Location1.Y=3007.5mil|Location2.Y=3012.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3824.98mil|Location2.X=3829.98mil|Location1.Y=3007.5mil|Location2.Y=3012.5mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Arc (1620mil,740mil) on Top Overlay And Pad C12-1(1777.48mil,740mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.117mil|Location2.X=3517.117mil|Location1.Y=2981.885mil|Location2.Y=2986.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3512.117mil|Location2.X=3517.117mil|Location1.Y=2981.885mil|Location2.Y=2986.885mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Arc (1620mil,740mil) on Top Overlay And Pad C12-2(1462.52mil,740mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4577.303mil|Location2.X=4582.303mil|Location1.Y=2467.5mil|Location2.Y=2472.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4577.303mil|Location2.X=4582.303mil|Location1.Y=2467.5mil|Location2.Y=2472.5mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Arc (2455mil,200mil) on Top Overlay And Pad C2-1(2539.646mil,200mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4429.377mil|Location2.X=4434.377mil|Location1.Y=2483.267mil|Location2.Y=2488.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4429.377mil|Location2.X=4434.377mil|Location1.Y=2483.267mil|Location2.Y=2488.267mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Arc (2455mil,200mil) on Top Overlay And Pad C2-2(2370.354mil,200mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4546.909mil|Location2.X=4551.909mil|Location1.Y=2702.113mil|Location2.Y=2707.113mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4546.909mil|Location2.X=4551.909mil|Location1.Y=2702.113mil|Location2.Y=2707.113mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Arc (2525mil,590mil) on Top Overlay And Pad C5-1(2525mil,432.52mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4598.115mil|Location2.X=4603.115mil|Location1.Y=3012.883mil|Location2.Y=3017.883mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4598.115mil|Location2.X=4603.115mil|Location1.Y=3012.883mil|Location2.Y=3017.883mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Arc (2525mil,590mil) on Top Overlay And Pad C5-2(2525mil,747.48mil) on Top Layer [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.494mil|Location2.X=2562.494mil|Location1.Y=3088.487mil|Location2.Y=3093.487mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2557.494mil|Location2.X=2562.494mil|Location1.Y=3088.487mil|Location2.Y=3093.487mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C11-1(530mil,855mil) on Multi-Layer And Text "D1" (490mil,781mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2577.5mil|Location2.X=2582.5mil|Location1.Y=3152.5mil|Location2.Y=3157.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2577.5mil|Location2.X=2582.5mil|Location1.Y=3152.5mil|Location2.Y=3157.5mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C11-1(530mil,855mil) on Multi-Layer And Track (530mil,885mil)(530mil,925mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2777.5mil|Location2.X=2782.5mil|Location1.Y=3152.5mil|Location2.Y=3157.5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2777.5mil|Location2.X=2782.5mil|Location1.Y=3152.5mil|Location2.Y=3157.5mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C11-2(730mil,855mil) on Multi-Layer And Track (730mil,885mil)(730mil,925mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3832.854mil|Location2.X=3837.854mil|Location1.Y=2981.91mil|Location2.Y=2986.91mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3832.854mil|Location2.X=3837.854mil|Location1.Y=2981.91mil|Location2.Y=2986.91mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C12-1(1777.48mil,740mil) on Top Layer And Track (1785.354mil,649.449mil)(1785.354mil,830.551mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3502.146mil|Location2.X=3507.146mil|Location1.Y=2981.885mil|Location2.Y=2986.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3502.146mil|Location2.X=3507.146mil|Location1.Y=2981.885mil|Location2.Y=2986.885mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C12-2(1462.52mil,740mil) on Top Layer And Track (1454.646mil,574.646mil)(1454.646mil,905.354mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4585.177mil|Location2.X=4590.177mil|Location1.Y=2451.752mil|Location2.Y=2456.752mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4585.177mil|Location2.X=4590.177mil|Location1.Y=2451.752mil|Location2.Y=2456.752mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C2-1(2539.646mil,200mil) on Top Layer And Track (2537.677mil,156.693mil)(2537.677mil,243.307mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4419.823mil|Location2.X=4424.823mil|Location1.Y=2483.267mil|Location2.Y=2488.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4419.823mil|Location2.X=4424.823mil|Location1.Y=2483.267mil|Location2.Y=2488.267mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C2-2(2370.354mil,200mil) on Top Layer And Track (2372.323mil,117.323mil)(2372.323mil,282.677mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4546.909mil|Location2.X=4551.909mil|Location1.Y=2692.146mil|Location2.Y=2697.146mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4546.909mil|Location2.X=4551.909mil|Location1.Y=2692.146mil|Location2.Y=2697.146mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C5-1(2525mil,432.52mil) on Top Layer And Track (2434.449mil,424.646mil)(2615.551mil,424.646mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4598.115mil|Location2.X=4603.115mil|Location1.Y=3022.854mil|Location2.Y=3027.854mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4598.115mil|Location2.X=4603.115mil|Location1.Y=3022.854mil|Location2.Y=3027.854mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad C5-2(2525mil,747.48mil) on Top Layer And Track (2359.646mil,755.354mil)(2690.354mil,755.354mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.123mil|Location2.X=2789.373mil|Location1.Y=2920.391mil|Location2.Y=2927.641mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.123mil|Location2.X=2789.373mil|Location1.Y=2920.391mil|Location2.Y=2927.641mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (3.071mil &lt; 6mil) Between Pad D1-1(720mil,690mil) on Top Layer And Track (735.748mil,630mil)(735.748mil,647.48mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [3.071mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.123mil|Location2.X=2789.373mil|Location1.Y=2992.851mil|Location2.Y=3000.101mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2782.123mil|Location2.X=2789.373mil|Location1.Y=2992.851mil|Location2.Y=3000.101mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.055mil &lt; 6mil) Between Pad D1-1(720mil,690mil) on Top Layer And Track (735.748mil,733.504mil)(735.748mil,750mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.055mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2575.824mil|Location2.X=2583.074mil|Location1.Y=2921.651mil|Location2.Y=2928.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2575.824mil|Location2.X=2583.074mil|Location1.Y=2921.651mil|Location2.Y=2928.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.551mil &lt; 6mil) Between Pad D1-2(538.898mil,690mil) on Top Layer And Track (529.449mil,630mil)(529.449mil,650mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.551mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2575.824mil|Location2.X=2583.074mil|Location1.Y=2991.099mil|Location2.Y=2998.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2575.824mil|Location2.X=2583.074mil|Location1.Y=2991.099mil|Location2.Y=2998.349mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.551mil &lt; 6mil) Between Pad D1-2(538.898mil,690mil) on Top Layer And Track (529.449mil,730mil)(529.449mil,750mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.551mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2610.824mil|Location2.X=2618.074mil|Location1.Y=2921.651mil|Location2.Y=2928.901mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2610.824mil|Location2.X=2618.074mil|Location1.Y=2921.651mil|Location2.Y=2928.901mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.551mil &lt; 6mil) Between Pad D1-2(538.898mil,690mil) on Top Layer And Track (564.449mil,636.85mil)(564.449mil,650mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.551mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2610.824mil|Location2.X=2618.074mil|Location1.Y=2991.099mil|Location2.Y=2998.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2610.824mil|Location2.X=2618.074mil|Location1.Y=2991.099mil|Location2.Y=2998.349mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.551mil &lt; 6mil) Between Pad D1-2(538.898mil,690mil) on Top Layer And Track (564.449mil,730mil)(564.449mil,743.15mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.551mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3698.737mil|Location2.X=3705.987mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3698.737mil|Location2.X=3705.987mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED2-1(1630.039mil,1863.544mil) on Top Layer And Track (1660mil,1861.575mil)(1730mil,1861.575mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3784.013mil|Location2.X=3791.263mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3784.013mil|Location2.X=3791.263mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED2-2(1759.961mil,1863.544mil) on Top Layer And Track (1660mil,1861.575mil)(1730mil,1861.575mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3784.013mil|Location2.X=3791.263mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3784.013mil|Location2.X=3791.263mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED2-3(1759.961mil,2056.457mil) on Top Layer And Track (1660mil,2058.426mil)(1730mil,2058.426mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3698.737mil|Location2.X=3705.987mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3698.737mil|Location2.X=3705.987mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED2-4(1630.039mil,2056.457mil) on Top Layer And Track (1660mil,2058.426mil)(1730mil,2058.426mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3995.404mil|Location2.X=4002.654mil|Location1.Y=4127.949mil|Location2.Y=4135.199mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3995.404mil|Location2.X=4002.654mil|Location1.Y=4127.949mil|Location2.Y=4135.199mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED3-1(1926.706mil,1863.542mil) on Top Layer And Track (1956.667mil,1861.574mil)(2026.667mil,1861.574mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4080.679mil|Location2.X=4087.929mil|Location1.Y=4127.949mil|Location2.Y=4135.199mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4080.679mil|Location2.X=4087.929mil|Location1.Y=4127.949mil|Location2.Y=4135.199mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED3-2(2056.627mil,1863.542mil) on Top Layer And Track (1956.667mil,1861.574mil)(2026.667mil,1861.574mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4080.679mil|Location2.X=4087.929mil|Location1.Y=4324.799mil|Location2.Y=4332.049mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4080.679mil|Location2.X=4087.929mil|Location1.Y=4324.799mil|Location2.Y=4332.049mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED3-3(2056.627mil,2056.456mil) on Top Layer And Track (1956.667mil,2058.424mil)(2026.667mil,2058.424mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3995.404mil|Location2.X=4002.654mil|Location1.Y=4324.799mil|Location2.Y=4332.049mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3995.404mil|Location2.X=4002.654mil|Location1.Y=4324.799mil|Location2.Y=4332.049mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED3-4(1926.706mil,2056.456mil) on Top Layer And Track (1956.667mil,2058.424mil)(2026.667mil,2058.424mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4292.07mil|Location2.X=4299.32mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4292.07mil|Location2.X=4299.32mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED4-1(2223.373mil,1863.544mil) on Top Layer And Track (2253.333mil,1861.575mil)(2323.333mil,1861.575mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4377.346mil|Location2.X=4384.596mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4377.346mil|Location2.X=4384.596mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED4-2(2353.294mil,1863.544mil) on Top Layer And Track (2253.333mil,1861.575mil)(2323.333mil,1861.575mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4377.346mil|Location2.X=4384.596mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4377.346mil|Location2.X=4384.596mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED4-3(2353.294mil,2056.457mil) on Top Layer And Track (2253.333mil,2058.426mil)(2323.333mil,2058.426mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4292.07mil|Location2.X=4299.32mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4292.07mil|Location2.X=4299.32mil|Location1.Y=4324.801mil|Location2.Y=4332.051mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED4-4(2223.373mil,2056.457mil) on Top Layer And Track (2253.333mil,2058.426mil)(2323.333mil,2058.426mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4588.737mil|Location2.X=4595.987mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4588.737mil|Location2.X=4595.987mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED5-1(2520.039mil,1863.543mil) on Top Layer And Track (2550mil,1861.575mil)(2620mil,1861.575mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4683.488mil|Location2.X=4688.488mil|Location1.Y=4101.516mil|Location2.Y=4106.516mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4683.488mil|Location2.X=4688.488mil|Location1.Y=4101.516mil|Location2.Y=4106.516mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad LED5-2(2649.96mil,1863.543mil) on Top Layer And Text "C19" (2615.016mil,1795.006mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4674.013mil|Location2.X=4681.263mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4674.013mil|Location2.X=4681.263mil|Location1.Y=4127.95mil|Location2.Y=4135.2mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED5-2(2649.96mil,1863.543mil) on Top Layer And Track (2550mil,1861.575mil)(2620mil,1861.575mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4674.013mil|Location2.X=4681.263mil|Location1.Y=4324.8mil|Location2.Y=4332.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4674.013mil|Location2.X=4681.263mil|Location1.Y=4324.8mil|Location2.Y=4332.05mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED5-3(2649.96mil,2056.457mil) on Top Layer And Track (2550mil,2058.425mil)(2620mil,2058.425mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4588.737mil|Location2.X=4595.987mil|Location1.Y=4324.8mil|Location2.Y=4332.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4588.737mil|Location2.X=4595.987mil|Location1.Y=4324.8mil|Location2.Y=4332.05mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.276mil &lt; 6mil) Between Pad LED5-4(2520.039mil,2056.457mil) on Top Layer And Track (2550mil,2058.425mil)(2620mil,2058.425mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.276mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.651mil|Location2.X=2963.901mil|Location1.Y=4087.181mil|Location2.Y=4094.431mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2956.651mil|Location2.X=2963.901mil|Location1.Y=4087.181mil|Location2.Y=4094.431mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (2.4mil &lt; 6mil) Between Pad Q3-2(1115mil,1670mil) on Top Layer And Text "Q3" (901.678mil,1825.006mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [2.4mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2343.461mil|Location2.X=2348.461mil|Location1.Y=2847.499mil|Location2.Y=2852.499mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2343.461mil|Location2.X=2348.461mil|Location1.Y=2847.499mil|Location2.Y=2852.499mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 6mil) Between Pad R13-2(305.197mil,604.999mil) on Top Layer And Text "NEON" (176mil,546mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2333.439mil|Location2.X=2340.689mil|Location1.Y=2991.374mil|Location2.Y=2998.624mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2333.439mil|Location2.X=2340.689mil|Location1.Y=2991.374mil|Location2.Y=2998.624mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (1.266mil &lt; 6mil) Between Pad R14-2(305.197mil,749.999mil) on Top Layer And Text "GND" (176.799mil,698.536mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [1.266mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.459mil|Location2.X=4212.296mil|Location1.Y=3615.264mil|Location2.Y=3623.477mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.459mil|Location2.X=4212.296mil|Location1.Y=3615.264mil|Location2.Y=3623.477mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.646mil &lt; 6mil) Between Pad U1-1(2171.26mil,1325.669mil) on Top Layer And Track (2151.575mil,1353.228mil)(2151.575mil,1430mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.646mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4206.808mil|Location2.X=4214.058mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4206.808mil|Location2.X=4214.058mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-1(2171.26mil,1325.669mil) on Top Layer And Track (2151.575mil,1353.228mil)(2348.425mil,1353.228mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.459mil|Location2.X=4212.38mil|Location1.Y=3776.579mil|Location2.Y=3784.736mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.459mil|Location2.X=4212.38mil|Location1.Y=3776.579mil|Location2.Y=3784.736mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.646mil &lt; 6mil) Between Pad U1-10(2171.26mil,1534.331mil) on Top Layer And Track (2151.575mil,1430mil)(2151.575mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.646mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.462mil|Location2.X=4235.712mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4228.462mil|Location2.X=4235.712mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-10(2171.26mil,1534.331mil) on Top Layer And Track (2151.575mil,1506.772mil)(2348.425mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4246.178mil|Location2.X=4253.428mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4246.178mil|Location2.X=4253.428mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-2(2210.63mil,1325.669mil) on Top Layer And Track (2151.575mil,1353.228mil)(2348.425mil,1353.228mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4285.548mil|Location2.X=4292.798mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4285.548mil|Location2.X=4292.798mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-3(2250mil,1325.669mil) on Top Layer And Track (2151.575mil,1353.228mil)(2348.425mil,1353.228mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4324.918mil|Location2.X=4332.168mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4324.918mil|Location2.X=4332.168mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-4(2289.37mil,1325.669mil) on Top Layer And Track (2151.575mil,1353.228mil)(2348.425mil,1353.228mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4364.288mil|Location2.X=4371.538mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4364.288mil|Location2.X=4371.538mil|Location1.Y=3614.151mil|Location2.Y=3621.401mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-5(2328.74mil,1325.669mil) on Top Layer And Track (2151.575mil,1353.228mil)(2348.425mil,1353.228mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4388.291mil|Location2.X=4396.211mil|Location1.Y=3614.356mil|Location2.Y=3622.514mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4388.291mil|Location2.X=4396.211mil|Location1.Y=3614.356mil|Location2.Y=3622.514mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.646mil &lt; 6mil) Between Pad U1-5(2328.74mil,1325.669mil) on Top Layer And Track (2348.425mil,1353.228mil)(2348.425mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.646mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4385.942mil|Location2.X=4393.192mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4385.942mil|Location2.X=4393.192mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-6(2328.74mil,1534.331mil) on Top Layer And Track (2151.575mil,1506.772mil)(2348.425mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4388.291mil|Location2.X=4396.128mil|Location1.Y=3777.486mil|Location2.Y=3785.699mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4388.291mil|Location2.X=4396.128mil|Location1.Y=3777.486mil|Location2.Y=3785.699mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.646mil &lt; 6mil) Between Pad U1-6(2328.74mil,1534.331mil) on Top Layer And Track (2348.425mil,1353.228mil)(2348.425mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.646mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4346.572mil|Location2.X=4353.822mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4346.572mil|Location2.X=4353.822mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-7(2289.37mil,1534.331mil) on Top Layer And Track (2151.575mil,1506.772mil)(2348.425mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4307.202mil|Location2.X=4314.452mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4307.202mil|Location2.X=4314.452mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-8(2250mil,1534.331mil) on Top Layer And Track (2151.575mil,1506.772mil)(2348.425mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4267.832mil|Location2.X=4275.082mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4267.832mil|Location2.X=4275.082mil|Location1.Y=3778.599mil|Location2.Y=3785.849mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.906mil &lt; 6mil) Between Pad U1-9(2210.63mil,1534.331mil) on Top Layer And Track (2151.575mil,1506.772mil)(2348.425mil,1506.772mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [0.906mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4229.717mil|Location2.X=4236.967mil|Location1.Y=3185.646mil|Location2.Y=3192.896mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4229.717mil|Location2.X=4236.967mil|Location1.Y=3185.646mil|Location2.Y=3192.896mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.471mil &lt; 6mil) Between Pad U2-2(2135mil,784.646mil) on Top Layer And Text "U2" (2176.677mil,925.006mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.471mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.501mil|Location2.X=3119.626mil|Location1.Y=3366.859mil|Location2.Y=3374.773mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3111.501mil|Location2.X=3119.626mil|Location1.Y=3366.859mil|Location2.Y=3374.773mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (4.046mil &lt; 6mil) Between Pad U4-4(1055mil,1059.488mil) on Top Layer And Text "U4" (1061.678mil,1105.006mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [4.046mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDUUBZMK3XTVKSPALFVQOUAW1FEDKAGHZLVPUOPKEUJIFHCLBBYQ2H"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=6mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3501.021mil|Location2.X=3508.271mil|Location1.Y=3181.305mil|Location2.Y=3188.555mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3501.021mil|Location2.X=3508.271mil|Location1.Y=3181.305mil|Location2.Y=3188.555mil|Absolute=True">Silk To Silk Clearance Constraint: (4.152mil &lt; 6mil) Between Text "C12" (1440.016mil,920.006mil) on Top Overlay And Track (1454.646mil,574.646mil)(1454.646mil,905.354mil) on Top Overlay Silk Text to Silk Clearance [4.152mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3506.385mil|Location2.X=3513.635mil|Location1.Y=3181.305mil|Location2.Y=3188.555mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3506.385mil|Location2.X=3513.635mil|Location1.Y=3181.305mil|Location2.Y=3188.555mil|Absolute=True">Silk To Silk Clearance Constraint: (4.152mil &lt; 6mil) Between Text "C12" (1440.016mil,920.006mil) on Top Overlay And Track (1454.646mil,905.354mil)(1710.551mil,905.354mil) on Top Overlay Silk Text to Silk Clearance [4.152mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3336.385mil|Location2.X=3343.635mil|Location1.Y=3281.546mil|Location2.Y=3288.796mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3336.385mil|Location2.X=3343.635mil|Location1.Y=3281.546mil|Location2.Y=3288.796mil|Absolute=True">Silk To Silk Clearance Constraint: (3.672mil &lt; 6mil) Between Text "C13" (1270.016mil,1020.006mil) on Top Overlay And Track (1278.999mil,1009.335mil)(1350.999mil,1009.335mil) on Top Overlay Silk Text to Silk Clearance [3.672mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3325.374mil|Location2.X=3332.624mil|Location1.Y=3281.546mil|Location2.Y=3288.796mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3325.374mil|Location2.X=3332.624mil|Location1.Y=3281.546mil|Location2.Y=3288.796mil|Absolute=True">Silk To Silk Clearance Constraint: (3.672mil &lt; 6mil) Between Text "C13" (1270.016mil,1020.006mil) on Top Overlay And Track (1278.999mil,957.405mil)(1278.999mil,1009.335mil) on Top Overlay Silk Text to Silk Clearance [3.672mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3397.368mil|Location2.X=3404.618mil|Location1.Y=3281.546mil|Location2.Y=3288.796mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3397.368mil|Location2.X=3404.618mil|Location1.Y=3281.546mil|Location2.Y=3288.796mil|Absolute=True">Silk To Silk Clearance Constraint: (3.672mil &lt; 6mil) Between Text "C13" (1270.016mil,1020.006mil) on Top Overlay And Track (1350.993mil,957.405mil)(1350.993mil,1009.335mil) on Top Overlay Silk Text to Silk Clearance [3.672mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2951.385mil|Location2.X=2958.635mil|Location1.Y=3281.644mil|Location2.Y=3288.894mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2951.385mil|Location2.X=2958.635mil|Location1.Y=3281.644mil|Location2.Y=3288.894mil|Absolute=True">Silk To Silk Clearance Constraint: (3.476mil &lt; 6mil) Between Text "C15" (885.016mil,1020.006mil) on Top Overlay And Track (904mil,1009.531mil)(976mil,1009.531mil) on Top Overlay Silk Text to Silk Clearance [3.476mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2950.375mil|Location2.X=2957.625mil|Location1.Y=3281.644mil|Location2.Y=3288.894mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2950.375mil|Location2.X=2957.625mil|Location1.Y=3281.644mil|Location2.Y=3288.894mil|Absolute=True">Silk To Silk Clearance Constraint: (3.476mil &lt; 6mil) Between Text "C15" (885.016mil,1020.006mil) on Top Overlay And Track (904mil,957.602mil)(904mil,1009.531mil) on Top Overlay Silk Text to Silk Clearance [3.476mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3022.369mil|Location2.X=3029.619mil|Location1.Y=3281.644mil|Location2.Y=3288.894mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3022.369mil|Location2.X=3029.619mil|Location1.Y=3281.644mil|Location2.Y=3288.894mil|Absolute=True">Silk To Silk Clearance Constraint: (3.476mil &lt; 6mil) Between Text "C15" (885.016mil,1020.006mil) on Top Overlay And Track (975.994mil,957.602mil)(975.994mil,1009.531mil) on Top Overlay Silk Text to Silk Clearance [3.476mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.192mil|Location2.X=3823.248mil|Location1.Y=3983.936mil|Location2.Y=3991.921mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.192mil|Location2.X=3823.248mil|Location1.Y=3983.936mil|Location2.Y=3991.921mil|Absolute=True">Silk To Silk Clearance Constraint: (4.14mil &lt; 6mil) Between Text "C16" (1767.612mil,1720.007mil) on Top Overlay And Track (1712.596mil,1714.003mil)(1764.525mil,1714.003mil) on Top Overlay Silk Text to Silk Clearance [4.14mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.112mil|Location2.X=3820.112mil|Location1.Y=4020.829mil|Location2.Y=4025.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3815.112mil|Location2.X=3820.112mil|Location1.Y=4020.829mil|Location2.Y=4025.829mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "C16" (1767.612mil,1720.007mil) on Top Overlay And Track (1764.525mil,1714.003mil)(1764.525mil,1786.003mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4113.262mil|Location2.X=4121.318mil|Location1.Y=3984.537mil|Location2.Y=3992.523mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4113.262mil|Location2.X=4121.318mil|Location1.Y=3984.537mil|Location2.Y=3992.523mil|Absolute=True">Silk To Silk Clearance Constraint: (5.843mil &lt; 6mil) Between Text "C17" (2067.484mil,1720.011mil) on Top Overlay And Track (2010.063mil,1714.003mil)(2061.992mil,1714.003mil) on Top Overlay Silk Text to Silk Clearance [5.843mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4114.984mil|Location2.X=4119.984mil|Location1.Y=4020.833mil|Location2.Y=4025.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4114.984mil|Location2.X=4119.984mil|Location1.Y=4020.833mil|Location2.Y=4025.833mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "C17" (2067.484mil,1720.011mil) on Top Overlay And Track (2061.992mil,1714.003mil)(2061.992mil,1786.003mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4410.378mil|Location2.X=4417.628mil|Location1.Y=4024.704mil|Location2.Y=4031.954mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4410.378mil|Location2.X=4417.628mil|Location1.Y=4024.704mil|Location2.Y=4031.954mil|Absolute=True">Silk To Silk Clearance Constraint: (1.087mil &lt; 6mil) Between Text "C18" (2367.546mil,1725.006mil) on Top Overlay And Track (2359.459mil,1714.003mil)(2359.459mil,1786.003mil) on Top Overlay Silk Text to Silk Clearance [1.087mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4668.056mil|Location2.X=4675.306mil|Location1.Y=4057.377mil|Location2.Y=4064.627mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4668.056mil|Location2.X=4675.306mil|Location1.Y=4057.377mil|Location2.Y=4064.627mil|Absolute=True">Silk To Silk Clearance Constraint: (2.01mil &lt; 6mil) Between Text "C19" (2615.016mil,1795.006mil) on Top Overlay And Track (2605mil,1785.997mil)(2656.929mil,1785.997mil) on Top Overlay Silk Text to Silk Clearance [2.01mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4703.304mil|Location2.X=4710.554mil|Location1.Y=4057.38mil|Location2.Y=4064.63mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4703.304mil|Location2.X=4710.554mil|Location1.Y=4057.38mil|Location2.Y=4064.63mil|Absolute=True">Silk To Silk Clearance Constraint: (2.003mil &lt; 6mil) Between Text "C19" (2615.016mil,1795.006mil) on Top Overlay And Track (2656.929mil,1714.003mil)(2656.929mil,1786.003mil) on Top Overlay Silk Text to Silk Clearance [2.003mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4574.418mil|Location2.X=4582.474mil|Location1.Y=2528.677mil|Location2.Y=2536.662mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4574.418mil|Location2.X=4582.474mil|Location1.Y=2528.677mil|Location2.Y=2536.662mil|Absolute=True">Silk To Silk Clearance Constraint: (4.278mil &lt; 6mil) Between Text "C2" (2531.677mil,260.007mil) on Top Overlay And Track (2498.307mil,282.677mil)(2537.677mil,243.307mil) on Top Overlay Silk Text to Silk Clearance [4.278mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.046mil|Location2.X=3640.296mil|Location1.Y=2356.514mil|Location2.Y=2363.764mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3633.046mil|Location2.X=3640.296mil|Location1.Y=2356.514mil|Location2.Y=2363.764mil|Absolute=True">Silk To Silk Clearance Constraint: (4.29mil &lt; 6mil) Between Text "C3" (1566.678mil,45.007mil) on Top Overlay And Track (1490.001mil,97.284mil)(1630.001mil,97.284mil) on Top Overlay Silk Text to Silk Clearance [4.29mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.442mil|Location2.X=3681.692mil|Location1.Y=2356.548mil|Location2.Y=2363.798mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3674.442mil|Location2.X=3681.692mil|Location1.Y=2356.548mil|Location2.Y=2363.798mil|Absolute=True">Silk To Silk Clearance Constraint: (4.736mil &lt; 6mil) Between Text "C3" (1566.678mil,45.007mil) on Top Overlay And Track (1630.001mil,97.284mil)(1630.001mil,207.284mil) on Top Overlay Silk Text to Silk Clearance [4.736mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4191.503mil|Location2.X=4196.503mil|Location1.Y=2358.301mil|Location2.Y=2363.301mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4191.503mil|Location2.X=4196.503mil|Location1.Y=2358.301mil|Location2.Y=2363.301mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "C4" (2136.682mil,50.814mil) on Top Overlay And Track (2144.003mil,96.284mil)(2144.003mil,148.213mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.175mil|Location2.X=4209.175mil|Location1.Y=2358.301mil|Location2.Y=2363.301mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4204.175mil|Location2.X=4209.175mil|Location1.Y=2358.301mil|Location2.Y=2363.301mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "C4" (2136.682mil,50.814mil) on Top Overlay And Track (2144.003mil,96.284mil)(2216.003mil,96.284mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4614.717mil|Location2.X=4621.967mil|Location1.Y=3031.305mil|Location2.Y=3038.555mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4614.717mil|Location2.X=4621.967mil|Location1.Y=3031.305mil|Location2.Y=3038.555mil|Absolute=True">Silk To Silk Clearance Constraint: (4.152mil &lt; 6mil) Between Text "C5" (2561.677mil,770.006mil) on Top Overlay And Track (2359.646mil,755.354mil)(2690.354mil,755.354mil) on Top Overlay Silk Text to Silk Clearance [4.152mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4269.181mil|Location2.X=4274.181mil|Location1.Y=2632.913mil|Location2.Y=2637.913mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4269.181mil|Location2.X=4274.181mil|Location1.Y=2632.913mil|Location2.Y=2637.913mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "C7" (2221.682mil,332.091mil) on Top Overlay And Track (2215.997mil,354.686mil)(2215.997mil,406.615mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.5mil|Location2.X=2330.5mil|Location1.Y=2966.036mil|Location2.Y=2971.036mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.5mil|Location2.X=2330.5mil|Location1.Y=2966.036mil|Location2.Y=2971.036mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "GND" (176.799mil,698.536mil) on Top Overlay And Text "R13" (278mil,671mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2217.743mil|Location2.X=2224.993mil|Location1.Y=2998.234mil|Location2.Y=3005.484mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2217.743mil|Location2.X=2224.993mil|Location1.Y=2998.234mil|Location2.Y=3005.484mil|Absolute=True">Silk To Silk Clearance Constraint: (4.862mil &lt; 6mil) Between Text "GND" (176.799mil,698.536mil) on Top Overlay And Track (165mil,550mil)(165mil,750mil) on Top Overlay Silk Text to Silk Clearance [4.862mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2324.267mil|Location2.X=2329.267mil|Location1.Y=3006.023mil|Location2.Y=3011.023mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2324.267mil|Location2.X=2329.267mil|Location1.Y=3006.023mil|Location2.Y=3011.023mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "GND" (176.799mil,698.536mil) on Top Overlay And Track (275.666mil,713.999mil)(275.666mil,785.999mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2330.932mil|Location2.X=2335.932mil|Location1.Y=2981.499mil|Location2.Y=2986.499mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2330.932mil|Location2.X=2335.932mil|Location1.Y=2981.499mil|Location2.Y=2986.499mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "GND" (176.799mil,698.536mil) on Top Overlay And Track (275.666mil,713.999mil)(409.525mil,713.999mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2217.343mil|Location2.X=2224.593mil|Location1.Y=2852.362mil|Location2.Y=2859.612mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2217.343mil|Location2.X=2224.593mil|Location1.Y=2852.362mil|Location2.Y=2859.612mil|Absolute=True">Silk To Silk Clearance Constraint: (4.063mil &lt; 6mil) Between Text "NEON" (176mil,546mil) on Top Overlay And Track (165mil,550mil)(165mil,750mil) on Top Overlay Silk Text to Silk Clearance [4.063mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2323.166mil|Location2.X=2328.166mil|Location1.Y=2853.487mil|Location2.Y=2858.487mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2323.166mil|Location2.X=2328.166mil|Location1.Y=2853.487mil|Location2.Y=2858.487mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "NEON" (176mil,546mil) on Top Overlay And Track (275.666mil,568.999mil)(275.666mil,640.999mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2330.132mil|Location2.X=2335.132mil|Location1.Y=2836.499mil|Location2.Y=2841.499mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2330.132mil|Location2.X=2335.132mil|Location1.Y=2836.499mil|Location2.Y=2841.499mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "NEON" (176mil,546mil) on Top Overlay And Track (275.666mil,568.999mil)(409.524mil,568.999mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2217.343mil|Location2.X=2224.593mil|Location1.Y=2816.375mil|Location2.Y=2823.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2217.343mil|Location2.X=2224.593mil|Location1.Y=2816.375mil|Location2.Y=2823.625mil|Absolute=True">Silk To Silk Clearance Constraint: (4.063mil &lt; 6mil) Between Text "NEON" (176mil,546mil) on Top Overlay And Track (65mil,550mil)(165mil,550mil) on Top Overlay Silk Text to Silk Clearance [4.063mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.375mil|Location2.X=4052.625mil|Location1.Y=3335.112mil|Location2.Y=3342.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4045.375mil|Location2.X=4052.625mil|Location1.Y=3335.112mil|Location2.Y=3342.362mil|Absolute=True">Silk To Silk Clearance Constraint: (1.487mil &lt; 6mil) Between Text "R10" (1990.016mil,1025.006mil) on Top Overlay And Track (1999mil,1073.48mil)(1999mil,1207.339mil) on Top Overlay Silk Text to Silk Clearance [1.487mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4056.385mil|Location2.X=4063.635mil|Location1.Y=3335.112mil|Location2.Y=3342.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4056.385mil|Location2.X=4063.635mil|Location1.Y=3335.112mil|Location2.Y=3342.362mil|Absolute=True">Silk To Silk Clearance Constraint: (1.487mil &lt; 6mil) Between Text "R10" (1990.016mil,1025.006mil) on Top Overlay And Track (1999mil,1073.48mil)(2071mil,1073.48mil) on Top Overlay Silk Text to Silk Clearance [1.487mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4117.375mil|Location2.X=4124.625mil|Location1.Y=3335.112mil|Location2.Y=3342.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4117.375mil|Location2.X=4124.625mil|Location1.Y=3335.112mil|Location2.Y=3342.362mil|Absolute=True">Silk To Silk Clearance Constraint: (1.487mil &lt; 6mil) Between Text "R10" (1990.016mil,1025.006mil) on Top Overlay And Track (2071mil,1073.48mil)(2071mil,1207.339mil) on Top Overlay Silk Text to Silk Clearance [1.487mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2737.577mil|Location2.X=2744.827mil|Location1.Y=2366.381mil|Location2.Y=2373.631mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2737.577mil|Location2.X=2744.827mil|Location1.Y=2366.381mil|Location2.Y=2373.631mil|Absolute=True">Silk To Silk Clearance Constraint: (5.354mil &lt; 6mil) Between Text "R11" (696.879mil,100.007mil) on Top Overlay And Track (684.525mil,88.999mil)(684.525mil,160.999mil) on Top Overlay Silk Text to Silk Clearance [5.354mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2736.646mil|Location2.X=2743.896mil|Location1.Y=2631.381mil|Location2.Y=2638.631mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2736.646mil|Location2.X=2743.896mil|Location1.Y=2631.381mil|Location2.Y=2638.631mil|Absolute=True">Silk To Silk Clearance Constraint: (3.491mil &lt; 6mil) Between Text "R12" (695.016mil,365.007mil) on Top Overlay And Track (684.525mil,353.999mil)(684.525mil,425.999mil) on Top Overlay Silk Text to Silk Clearance [3.491mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.5mil|Location2.X=2330.5mil|Location1.Y=2978.487mil|Location2.Y=2983.487mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.5mil|Location2.X=2330.5mil|Location1.Y=2978.487mil|Location2.Y=2983.487mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "R13" (278mil,671mil) on Top Overlay And Track (275.666mil,713.999mil)(275.666mil,785.999mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.5mil|Location2.X=2330.5mil|Location1.Y=2978.487mil|Location2.Y=2983.487mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2325.5mil|Location2.X=2330.5mil|Location1.Y=2978.487mil|Location2.Y=2983.487mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "R13" (278mil,671mil) on Top Overlay And Track (275.666mil,713.999mil)(409.525mil,713.999mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2342.04mil|Location2.X=2349.29mil|Location1.Y=4040.371mil|Location2.Y=4047.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2342.04mil|Location2.X=2349.29mil|Location1.Y=4040.371mil|Location2.Y=4047.621mil|Absolute=True">Silk To Silk Clearance Constraint: (2.006mil &lt; 6mil) Between Text "R17" (290.016mil,1730.006mil) on Top Overlay And Track (295.665mil,1778.999mil)(295.665mil,1850.999mil) on Top Overlay Silk Text to Silk Clearance [2.006mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2356.385mil|Location2.X=2363.635mil|Location1.Y=4040.371mil|Location2.Y=4047.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2356.385mil|Location2.X=2363.635mil|Location1.Y=4040.371mil|Location2.Y=4047.621mil|Absolute=True">Silk To Silk Clearance Constraint: (2.006mil &lt; 6mil) Between Text "R17" (290.016mil,1730.006mil) on Top Overlay And Track (295.665mil,1778.999mil)(429.523mil,1778.999mil) on Top Overlay Silk Text to Silk Clearance [2.006mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2338.951mil|Location2.X=2347.135mil|Location1.Y=3992.3mil|Location2.Y=4000.204mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2338.951mil|Location2.X=2347.135mil|Location1.Y=3992.3mil|Location2.Y=4000.204mil|Absolute=True">Silk To Silk Clearance Constraint: (3.635mil &lt; 6mil) Between Text "R17" (290.016mil,1730.006mil) on Top Overlay And Track (295.667mil,1648.997mil)(295.667mil,1720.997mil) on Top Overlay Silk Text to Silk Clearance [3.635mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2363.049mil|Location2.X=2370.299mil|Location1.Y=3992.377mil|Location2.Y=3999.627mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2363.049mil|Location2.X=2370.299mil|Location1.Y=3992.377mil|Location2.Y=3999.627mil|Absolute=True">Silk To Silk Clearance Constraint: (2.01mil &lt; 6mil) Between Text "R17" (290.016mil,1730.006mil) on Top Overlay And Track (295.667mil,1720.997mil)(347.596mil,1720.997mil) on Top Overlay Silk Text to Silk Clearance [2.01mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3317.993mil|Location2.X=3325.243mil|Location1.Y=2952.375mil|Location2.Y=2959.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3317.993mil|Location2.X=3325.243mil|Location1.Y=2952.375mil|Location2.Y=2959.625mil|Absolute=True">Silk To Silk Clearance Constraint: (0.56mil &lt; 6mil) Between Text "R19" (1274.898mil,685.006mil) on Top Overlay And Track (1071.457mil,686mil)(1266.339mil,686mil) on Top Overlay Silk Text to Silk Clearance [0.56mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3317.993mil|Location2.X=3325.243mil|Location1.Y=2991.369mil|Location2.Y=2998.619mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3317.993mil|Location2.X=3325.243mil|Location1.Y=2991.369mil|Location2.Y=2998.619mil|Absolute=True">Silk To Silk Clearance Constraint: (0.56mil &lt; 6mil) Between Text "R19" (1274.898mil,685.006mil) on Top Overlay And Track (1266.339mil,686mil)(1266.339mil,774mil) on Top Overlay Silk Text to Silk Clearance [0.56mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3203.052mil|Location2.X=3210.302mil|Location1.Y=2777.873mil|Location2.Y=2785.123mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3203.052mil|Location2.X=3210.302mil|Location1.Y=2777.873mil|Location2.Y=2785.123mil|Absolute=True">Silk To Silk Clearance Constraint: (3.675mil &lt; 6mil) Between Text "R3" (1156.678mil,466.673mil) on Top Overlay And Track (1083.071mil,517.335mil)(1216.929mil,517.335mil) on Top Overlay Silk Text to Silk Clearance [3.675mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3263.156mil|Location2.X=3270.406mil|Location1.Y=2777.873mil|Location2.Y=2785.123mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3263.156mil|Location2.X=3270.406mil|Location1.Y=2777.873mil|Location2.Y=2785.123mil|Absolute=True">Silk To Silk Clearance Constraint: (3.678mil &lt; 6mil) Between Text "R3" (1156.678mil,466.673mil) on Top Overlay And Track (1216.929mil,517.335mil)(1216.929mil,589.335mil) on Top Overlay Silk Text to Silk Clearance [3.678mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3872.197mil|Location2.X=3880.182mil|Location1.Y=3257.232mil|Location2.Y=3265.287mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3872.197mil|Location2.X=3880.182mil|Location1.Y=3257.232mil|Location2.Y=3265.287mil|Absolute=True">Silk To Silk Clearance Constraint: (5.729mil &lt; 6mil) Between Text "R4" (1821.678mil,995.006mil) on Top Overlay And Track (1830.672mil,914mil)(1830.672mil,986mil) on Top Overlay Silk Text to Silk Clearance [5.729mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.711mil|Location2.X=3901.961mil|Location1.Y=3257.378mil|Location2.Y=3264.628mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3894.711mil|Location2.X=3901.961mil|Location1.Y=3257.378mil|Location2.Y=3264.628mil|Absolute=True">Silk To Silk Clearance Constraint: (2.006mil &lt; 6mil) Between Text "R4" (1821.678mil,995.006mil) on Top Overlay And Track (1830.672mil,986mil)(1964.531mil,986mil) on Top Overlay Silk Text to Silk Clearance [2.006mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4284.774mil|Location2.X=4292.925mil|Location1.Y=3491.213mil|Location2.Y=3499.138mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4284.774mil|Location2.X=4292.925mil|Location1.Y=3491.213mil|Location2.Y=3499.138mil|Absolute=True">Silk To Silk Clearance Constraint: (5.699mil &lt; 6mil) Between Text "R6" (2241.677mil,1180.006mil) on Top Overlay And Track (2146mil,1231.339mil)(2234mil,1231.339mil) on Top Overlay Silk Text to Silk Clearance [5.699mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4289.177mil|Location2.X=4294.177mil|Location1.Y=3447.506mil|Location2.Y=3452.506mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4289.177mil|Location2.X=4294.177mil|Location1.Y=3447.506mil|Location2.Y=3452.506mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "R6" (2241.677mil,1180.006mil) on Top Overlay And Track (2234mil,1036.457mil)(2234mil,1231.339mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2737.57mil|Location2.X=2744.82mil|Location1.Y=2508.881mil|Location2.Y=2516.131mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2737.57mil|Location2.X=2744.82mil|Location1.Y=2508.881mil|Location2.Y=2516.131mil|Absolute=True">Silk To Silk Clearance Constraint: (5.344mil &lt; 6mil) Between Text "R7" (696.867mil,242.506mil) on Top Overlay And Track (684.524mil,221.501mil)(684.524mil,293.501mil) on Top Overlay Silk Text to Silk Clearance [5.344mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4040.823mil|Location2.X=4045.823mil|Location1.Y=3880.829mil|Location2.Y=3885.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4040.823mil|Location2.X=4045.823mil|Location1.Y=3880.829mil|Location2.Y=3885.829mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "R8" (1926.678mil,1580.006mil) on Top Overlay And Track (1999mil,1475.469mil)(1999mil,1609.327mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4040.823mil|Location2.X=4045.823mil|Location1.Y=3880.829mil|Location2.Y=3885.829mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\NixieClock\Nixie\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4040.823mil|Location2.X=4045.823mil|Location1.Y=3880.829mil|Location2.Y=3885.829mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 6mil) Between Text "R8" (1926.678mil,1580.006mil) on Top Overlay And Track (1999mil,1609.327mil)(2071mil,1609.327mil) on Top Overlay Silk Text to Silk Clearance [0mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
