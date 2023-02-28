@@ -1,9 +1,9 @@
-|RECORD=BOM|VERSION=2|FILENAME=D:\NixieClock\Nixie\Nixie.BomDoc|KIND=ALTIUM_DESIGNER_LIVEBOM|DATE=27.02.2023|TIME=17:21:54|CURRENCY=USD|PRODUCTIONQUANTITY=1|PERUNITTARGETPRICE=0|PERUNITACTUALPRICE=0
+|RECORD=BOM|VERSION=2|FILENAME=D:\NixieClock\Nixie\Nixie.$$$|KIND=ALTIUM_DESIGNER_LIVEBOM|DATE=28.02.2023|TIME=15:57:37|CURRENCY=USD|PRODUCTIONQUANTITY=1|PERUNITTARGETPRICE=0|PERUNITACTUALPRICE=0
 |RECORD=GeneralOptions|OPENEXPORTED=False|ADDTOPROJECT=False|FORCEFIT=False|NOTFITTED=False|TEMPLATEFILENAME=|BATCHMODE=0|SUPPLIERPRODQTY=0|SUPPLIERAUTOQTY=False|SUPPLIERUSECACHEDPRICING=False|SUPPLIERCURRENCY=|SOLUTIONSPERITEM=1|SUPPLIERSPERSOLUTION=1|DISPLAYTOTALROW=False|DISPLAYSUBTOTALSFORGROUPS=False|INCLUDEPCBPARAMETERS=False|INCLUDEDBPARAMETERS=False|INCLUDEVAULTPARAMETERS=False|INCLUDECLOUDPARAMETERS=False|INCLUDEDOCUMENTPARAMETERS=False|FILTEROUTRISKYSOLUTIONS=True|DESIGNATORGROUPING=No
-|RECORD=SortOrderOptions|SORTORDER=Comment=Up
+|RECORD=SortOrderOptions|SORTORDER=Value=Up
 |RECORD=GroupOrderOptions|GROUPORDER=
-|RECORD=VisibleOrderOptions|VISIBLEORDER=Comment=110!Description=188!Designator=152!Quantity=67!Value=86
-|RECORD=VisibleOrderOptions2|BASEVIEW=Comment=110!Description=188!Designator=152!Quantity=67!Value=86|FLATVIEW=Line #=-1!Comment=-1!Description=-1!Designator=-1!Manufacturer 1=102!Manufacturer Part Number 1=169!Manufacturer Lifecycle 1=147!Supplier 1=75!Supplier Part Number 1=142!Supplier Unit Price 1=127!Supplier Subtotal 1=122|CONSOLIDATEDVIEW=Line #=-1!Comment=-1!Description=-1!Designator=-1!Quantity=-1!Manufacturer 1=102!Manufacturer Part Number 1=169!Manufacturer Lifecycle 1=147!Supplier 1=75!Supplier Part Number 1=142!Supplier Unit Price 1=127!Supplier Subtotal 1=122
+|RECORD=VisibleOrderOptions|VISIBLEORDER=Comment=110!Description=188!Designator=152!Quantity=67!Value=86!Footprint=152
+|RECORD=VisibleOrderOptions2|BASEVIEW=Comment=110!Description=188!Designator=152!Quantity=67!Value=86!Footprint=152|FLATVIEW=Line #=-1!Comment=-1!Description=-1!Designator=-1!Manufacturer 1=102!Manufacturer Part Number 1=169!Manufacturer Lifecycle 1=147!Supplier 1=75!Supplier Part Number 1=142!Supplier Unit Price 1=127!Supplier Subtotal 1=122|CONSOLIDATEDVIEW=Line #=-1!Comment=-1!Description=-1!Designator=-1!Quantity=-1!Manufacturer 1=102!Manufacturer Part Number 1=169!Manufacturer Lifecycle 1=147!Supplier 1=75!Supplier Part Number 1=142!Supplier Unit Price 1=127!Supplier Subtotal 1=122
 |RECORD=CustomColumns|CUSTOMCOLUMNS=
 |RECORD=ColumnsAliases|COLUMNSALIASES=Comment=Name
 |RECORD=FilterOptions|FILTER=
